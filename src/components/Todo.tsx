@@ -1,27 +1,62 @@
-import React from "react";
+import { TodoContext } from "../Providers/TodoContext";
+import { useContext, useState } from "react";
+import { Todos, Checkbox, DeleteButton, EditButton, Button, Edit } from '../common';
+import { GrEdit } from 'react-icons/gr';
+import { IoTrashBin } from 'react-icons/io5';
 
-class Todo extends React.Component<any> {
-	shouldComponentUpdate(prevProps: any) {
-	if(this.props != prevProps) {
-		return true;
-	}
-		return false;
+const Todo: React.FC<ITodo> = (todo) => {
+
+	const { delTodo, updComplTodo, updTitleTodo } = useContext(TodoContext) as ContextType;
+	const [editable, setEditable] = useState(false);
+	const [editedInput, setEditedInput] = useState(todo.title);
+
+	const handleToggleClick = () => {
+		updComplTodo(todo)
+	};
+
+	const handleDelete = (todo: ITodo): void => {
+		delTodo(todo)
 	}
 
-	handleOnClick() {
-		window.location.href = '/detail'
-	}
+	const editTodo = (todo: ITodo) => {
+		updTitleTodo(todo, editedInput)
+	};
 
-	render() {
+	const handleEditSubmit = (e: React.FormEvent, todo: ITodo) => {
+		e.preventDefault();
+		editTodo(todo);
+		setEditable(!editable);
+	};
+
 
 	return (
-		<div>
-			<div onClick={this.handleOnClick}>
-			{this.props.todo.title}
-			</div>
-		</div>
+		<Todos>
+			<Checkbox
+				type='checkbox'
+				checked={todo.completed}
+				onChange={handleToggleClick}
+			/>
+			{!editable ? (
+				<h3>{todo.title}</h3>
+			) : (
+				<form onSubmit={(e) => handleEditSubmit(e, todo)}>
+					<Edit
+						onChange={(e: any) => setEditedInput(e.target.value)}
+						value={editedInput}
+						autoFocus
+					/>
+					<Button type='submit'>Edit</Button>
+				</form>
+			)}
+			<EditButton onClick={() => setEditable(!editable)}>
+				<GrEdit />
+			</EditButton>
+			<DeleteButton onClick={() => handleDelete(todo)}>
+				<IoTrashBin />
+			</DeleteButton>
+
+		</Todos>
 	);
-	}
-}
+};
 
 export default Todo;

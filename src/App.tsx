@@ -1,47 +1,18 @@
-import React from 'react';
-import Todo from './components/Todo';
 import './App.css';
+import NavBar from './components/NavBar';
+import AppRouter from './components/AppRouter';
+import TodoProvider from './Providers/TodoContext'
+import { BrowserRouter } from "react-router-dom";
 
-var todos = (): Promise<{ id: string; title: string; }[]> => new Promise((res) => {
-  setTimeout(() => {
-    res([
-      {
-        id: "1",
-        title: "Go shopping",
-      },
-      {
-        id: "2",
-        title: "Job interview",
-      },
-      {
-        id: "3",
-        title: "Prepare homework",
-      },
-    ]);
-  }, 100);
-});
-
-function App() {
-
-  const [state, setState] = React.useState<{ id: string; title: string }[]>([]);
-
-  React.useEffect(() => {
-    (async () => {
-      var awaitedTodos = await todos();
-      for (var i = 0; i < awaitedTodos.length; i++) {
-        setState([...state, awaitedTodos[i]]);
-      }
-    })()
-  })
-
+const App = () => {
   return (
-    <div>
-      {state.map((todo) => (
-        <Todo todo={todo} />
-      ))}
-    </div>
+    <TodoProvider>
+      <BrowserRouter>
+        <NavBar />
+        <AppRouter />
+      </BrowserRouter>
+    </TodoProvider>
   );
-
 }
 
 export default App;
