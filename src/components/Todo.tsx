@@ -14,9 +14,9 @@ const Todo: React.FC<ITodo> = (todo) => {
 		updComplTodo(todo)
 	};
 
-	const handleDelete = (todo: ITodo): void => {
+	const handleDelete = (todo: ITodo) => {
 		delTodo(todo)
-	}
+	};
 
 	const editTodo = (todo: ITodo) => {
 		updTitleTodo(todo, editedInput)

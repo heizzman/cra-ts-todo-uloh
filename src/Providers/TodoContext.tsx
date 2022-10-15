@@ -19,11 +19,11 @@ const TodoProvider: React.FC<PropsWithChildren> = ({ children }) => {
   };
 
   const updComplTodo = (todo: ITodo) => {
-    setTodos(todos.map(i => (i.id === todo.id && i.userId === todo.userId) ? { ...i, completed: !i.completed } : i))
+    setTodos(todos.map(i => (i.id === todo.id && i.userId === todo.userId) ? { ...i, completed: !i.completed } : i));
   };
 
   const updTitleTodo = (todo: ITodo, editedInput: string) => {
-    setTodos(todos.map(i => (i.id === todo.id && i.userId === todo.userId) ? { ...i, title: editedInput } : i))
+    setTodos(todos.map(i => (i.id === todo.id && i.userId === todo.userId) ? { ...i, title: editedInput } : i));
   };
 
   return (<TodoContext.Provider value={{ todos, addTodo, delTodo, updComplTodo, updTitleTodo, setTodos }}>{children}</TodoContext.Provider>);

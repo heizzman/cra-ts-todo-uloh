@@ -1,9 +1,9 @@
-import React from "react"
+import React from "react";
 import AddTodo from '../components/AddTodo';
 import Todolist from '../components/Todolist';
 import { TodoForm } from '../common';
 
-const Component: React.FC = () => {
+const TodoPage: React.FC = () => {
 
   return (
     <React.Fragment>
@@ -15,4 +15,4 @@ const Component: React.FC = () => {
   )
 }
 
-export default Component
+export default TodoPage;

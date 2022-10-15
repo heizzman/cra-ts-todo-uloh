@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const About: React.FC = () => {
 
@@ -12,4 +12,4 @@ const About: React.FC = () => {
   )
 }
 
-export default About
+export default About;

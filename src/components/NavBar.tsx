@@ -16,6 +16,6 @@ const NavBar: React.FC = () => {
   );
 }
 
-const white = { color: "white", padding: "1rem", fontSize: "1.2rem" }
+const white = { color: "white", padding: "1rem", fontSize: "1.2rem" };
 
 export default NavBar;
